@@ -7,19 +7,111 @@
     <link rel="stylesheet" href="./style.css">
 </head>
 <body>
-<nav>
-    <img class="Logo" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTWlLTKECCBhzCrwLPcEniWyWy3Mu84zVcCGNOiLxw9&s=10">
-    <div class="nav-menu">
-        <button class="button1" onclick="coin()">Coins</button>
-        <button class="button2">Vazifalar</button>
-        <button class="button3">Active</button>
-    </div>
-</nav>
 
-<div class="coin-page" style="display: none;">
-    <button class="back-btn" onclick="goBack()">⬅ Back</button>
-    <button class="coin-count-btn">Coins: <span id="coinCount">0</span></button>
-</div>
+    <!-- ===== NAV (doim ko'rinadi) ===== -->
+    <nav>
+        <img class="Logo" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTWlLTKECCBhzCrwLPcEniWyWy3Mu84zVcCGNOiLxw9&s=10">
+        <div class="nav-menu">
+            <button onclick="showSection('coins')">Coins</button>
+            <button onclick="showSection('tasks')">Vazifalar</button>
+            <button onclick="showSection('games')">O'yinlar</button>
+            <div id="navAuth"></div>
+        </div>
+    </nav>
+
+    <main class="content">
+
+        <!-- ===== HOME ===== -->
+        <section id="homeSection" class="page">
+            <div class="card">
+                <h1>Xush kelibsiz, It PRO Space'ga!</h1>
+                <p style="color:#aaa;margin-top:8px;">Yuqoridagi menyudan Coins reytingini ko'ring, Vazifalarni bajaring yoki O'yinlar bo'limida dam oling.</p>
+            </div>
+        </section>
+
+        <!-- ===== COINS (LEADERBOARD) ===== -->
+        <section id="coinsSection" class="page hidden">
+            <div class="card">
+                <div class="top">
+                    <h1>Coinlar reytingi (shu oy)</h1>
+                    <button id="earnCoinBtn" class="secondary" style="width:auto" onclick="earnCoin()">+1 Coin ishlash</button>
+                </div>
+                <div id="leaderboardList"></div>
+            </div>
+        </section>
+
+        <!-- ===== TASKS ===== -->
+        <section id="tasksSection" class="page hidden">
+            <div class="card">
+                <h1>Vazifalar</h1>
+
+                <div id="taskAdminForm" class="card hidden" style="background:#151822;margin-top:14px;">
+                    <h2 style="font-size:15px;margin-bottom:10px;">Yangi vazifa qo'shish</h2>
+                    <input id="newTaskTitle" placeholder="Vazifa nomi">
+                    <textarea id="newTaskDesc" placeholder="Vazifa tavsifi" rows="3" style="width:100%;padding:10px;border-radius:8px;border:1px solid #333;background:#111319;color:#fff;margin-bottom:10px;"></textarea>
+                    <button onclick="addTask()">Vazifa qo'shish</button>
+                </div>
+
+                <div id="taskList" style="margin-top:14px;"></div>
+            </div>
+        </section>
+
+        <!-- ===== GAMES ===== -->
+        <section id="gamesSection" class="page hidden">
+            <div class="card">
+                <div class="top">
+                    <h1>Xotira o'yini</h1>
+                    <button class="secondary" style="width:auto" onclick="startMemoryGame()">Qayta boshlash</button>
+                </div>
+                <p id="memoryStatus" style="color:#aaa;margin-bottom:14px;">Bir xil juftlikni toping!</p>
+                <div id="memoryGrid" class="memory-grid"></div>
+            </div>
+        </section>
+
+        <!-- ===== LOGIN ===== -->
+        <section id="loginSection" class="page hidden">
+            <div class="card">
+                <h1>Kirish</h1>
+                <input id="loginUser" placeholder="Login">
+                <input id="loginPass" type="password" placeholder="Parol">
+                <button onclick="login()">Kirish</button>
+                <button class="secondary" onclick="showSection('home')">Bekor qilish</button>
+            </div>
+        </section>
+
+        <!-- ===== ADMIN PANEL ===== -->
+        <section id="adminSection" class="page hidden">
+            <div class="card">
+                <h1>Admin panel</h1>
+                <p style="color:#aaa;margin-bottom:10px;">Oddiy foydalanuvchilarni boshqaring.</p>
+                <div id="adminUserList"></div>
+            </div>
+            <div class="card">
+                <h1>Topshirilgan vazifalar</h1>
+                <div id="adminSubmissionList"></div>
+            </div>
+        </section>
+
+        <!-- ===== OWNER PANEL ===== -->
+        <section id="ownerSection" class="page hidden">
+            <div class="card">
+                <h1>Owner panel</h1>
+                <div class="card" style="background:#151822">
+                    <h2 style="font-size:15px;margin-bottom:10px;">Yangi akkaunt qo'shish</h2>
+                    <input id="newLogin" placeholder="Login">
+                    <input id="newPass" placeholder="Parol">
+                    <select id="newRole">
+                        <option value="admin">Admin</option>
+                        <option value="user">Oddiy user</option>
+                    </select>
+                    <button onclick="addAccount()">Qo'shish</button>
+                </div>
+                <div id="ownerAccountList"></div>
+            </div>
+        </section>
+
+    </main>
+
     <script src="./script.js"></script>
 </body>
 </html>
